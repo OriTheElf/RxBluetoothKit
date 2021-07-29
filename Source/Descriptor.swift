@@ -28,9 +28,11 @@ public class Descriptor {
         self.characteristic = characteristic
     }
 
-    convenience init(descriptor: CBDescriptor, peripheral: Peripheral) {
-        let service = Service(peripheral: peripheral, service: descriptor.characteristic.service)
-        let characteristic = Characteristic(characteristic: descriptor.characteristic, service: service)
+    convenience init?(descriptor: CBDescriptor, peripheral: Peripheral) {
+        guard let char = descriptor.characteristic else { return nil }
+        guard let ser = char.service else { return nil }
+        let service = Service(peripheral: peripheral, service: ser)
+        let characteristic = Characteristic(characteristic: char, service: service)
         self.init(descriptor: descriptor, characteristic: characteristic)
     }
 

@@ -1,12 +1,13 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "RxBluetoothKit",
+    defaultLocalization: "en",
     platforms: [
-        .macOS(.v10_13), .iOS(.v9), .tvOS(.v11), .watchOS(.v4)
+        .macOS(.v10_13), .iOS(.v12), .tvOS(.v12), .watchOS(.v4)
     ],
     products: [
         .library(name: "RxBluetoothKit", targets: ["RxBluetoothKit"])
@@ -29,6 +30,9 @@ let package = Package(
                 ],
                 sources: [
                     "Source"
+                ],
+                swiftSettings: [
+                    .enableExperimentalFeature("StrictConcurrency")
                 ]
             )
     ]

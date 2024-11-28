@@ -60,6 +60,18 @@ class CBCentralManagerDelegateWrapper: NSObject, CBCentralManagerDelegate {
             """)
         didDisconnectPeripheral.onNext((peripheral, error))
     }
+    
+    func centralManager(_ central: CBCentralManager, 
+                        didDisconnectPeripheral peripheral: CBPeripheral,
+                        timestamp: CFAbsoluteTime,
+                        isReconnecting: Bool,
+                        error: (any Error)?) {
+        RxBluetoothKitLog.d("""
+            \(central.logDescription) didDisconnect(from: \(peripheral.logDescription),
+            error: \(String(describing: error)))
+            """)
+        didDisconnectPeripheral.onNext((peripheral, error))
+    }
 
     #if !os(macOS)
     @available(iOS 13.0, watchOS 6.0, tvOS 13.0, *)
